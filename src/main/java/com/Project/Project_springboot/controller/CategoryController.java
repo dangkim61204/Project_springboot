@@ -3,7 +3,9 @@ package com.Project.Project_springboot.controller;
 import com.Project.Project_springboot.model.Category;
 import com.Project.Project_springboot.model.Product;
 import com.Project.Project_springboot.repository.CategoryRepository;
+import com.Project.Project_springboot.repository.ProductReposity;
 import com.Project.Project_springboot.service.CategoryService;
+import com.Project.Project_springboot.service.ProductService;
 import com.Project.Project_springboot.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,9 @@ public class CategoryController {
     private CategoryService categoryService;
     @Autowired
     private StorageService storageService;
+
+    @Autowired
+    private ProductReposity productReposity;
 
 
 
@@ -81,7 +86,15 @@ public class CategoryController {
     }
 
     @RequestMapping("admin/deletecategory/{id}")
-    public String delete( @PathVariable("id") Integer id){
+    public String delete( @PathVariable("id") Integer id, Model model,@RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
+        if(this.productReposity.categoryId(id).stream().findFirst().isPresent()){
+             model.addAttribute("mes", "không thể xoá danh mục khi đã có sp thuộc danh mục này");
+            Page<Category> list =this.categoryService.getAll(1);
+            model.addAttribute("totalPage", list.getTotalPages());
+            model.addAttribute("currentPage", 1);
+            model.addAttribute("list", list);
+            return "admin/category/index";
+        }
         if(this.categoryService.delete(id)){
             return "redirect:/admin/category";
         }else{
@@ -89,7 +102,7 @@ public class CategoryController {
         }
     }
 
-    //up anh
+
 
 
 }

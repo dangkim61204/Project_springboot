@@ -43,7 +43,7 @@ public class Account {
     @Column(name = "Createdate")
     private Date createDate;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account_Role> accountRoles;
 
 

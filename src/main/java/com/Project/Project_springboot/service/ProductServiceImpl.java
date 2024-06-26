@@ -92,21 +92,20 @@ public class ProductServiceImpl implements ProductService{
         return this.productReposity.findByCategoryId(id);
     }
 
-//    @Override
-//    public List<Product> findAllSortedByName() {
-//        return this.productReposity.findAllSortedByName();
-//    }
+    @Override
+    public Page<Product> findAll(int page, int size, Sort sort) {
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return productReposity.findAll(pageable);
+    }
+
+    @Override
+     public Page<Product> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productReposity.findAll(pageable);
+    }
 
 
-//    @Override
-//    public List<Product> findProductByIdsAndprice(List<Integer> ids, String price) {
-//        return this.productReposity.finByPrices(ids, price);
-//    }
-//
-//    @Override
-//    public List<Product> findProductByIdAndprice(Integer id, String price) {
-//        return this.productReposity.finByPrice(id, price);
-//    }
+
 
 
 }

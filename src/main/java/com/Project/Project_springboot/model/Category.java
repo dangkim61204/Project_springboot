@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="Categories")
 @AllArgsConstructor
@@ -24,5 +26,7 @@ public class Category {
     @Column(name="Active")
     private boolean active;
 
+//    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+//    private List<Product> products;
 
 }

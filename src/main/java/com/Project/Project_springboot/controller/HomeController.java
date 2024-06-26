@@ -1,11 +1,14 @@
 package com.Project.Project_springboot.controller;
 
 import com.Project.Project_springboot.model.Account;
+import com.Project.Project_springboot.model.CartItem;
+import com.Project.Project_springboot.model.Category;
 import com.Project.Project_springboot.model.Product;
 import com.Project.Project_springboot.service.CategoryService;
 import com.Project.Project_springboot.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +34,10 @@ public class HomeController {
 
 
     @RequestMapping({"/", "/home"})
-    public String home(Model model){
+    public String home(Model model,HttpServletRequest req){
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("products", productService.getAll());
+
         return "/user/home";
     }
 
@@ -82,13 +87,37 @@ public class HomeController {
         return "/user/contact";
     }
 
-    @RequestMapping("/cart")
-    public String cart(){
-        return "/user/cart";
-    }
+//    @RequestMapping("/cart")
+//    public String cart(){
+//        return "/user/cart";
+//    }
 
     @RequestMapping("/checkout")
-    public String checkout(){
+    public String checkout(Model model, HttpServletRequest req){
+
+
+            model.addAttribute("page", "cart");
+            List<CartItem> carts = new ArrayList<>();
+            HttpSession session = req.getSession();
+            if (session.getAttribute("cart") != null) {
+
+                carts = (List<CartItem>) session.getAttribute("cart");
+                for (CartItem cart : carts) {
+                    System.out.println(cart.getId() + " " + cart.getName() + " " + cart.getQuantity());
+
+                }
+
+            }
+
+            double total = carts.stream()
+                    .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                    .sum();
+
+            // Đưa danh sách sản phẩm và tổng giá trị vào model
+
+            model.addAttribute("total", total);
+            model.addAttribute("carts", carts);
+
 
         return "/user/checkout";
     }

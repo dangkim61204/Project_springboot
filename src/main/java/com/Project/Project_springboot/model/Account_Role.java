@@ -16,7 +16,7 @@ public class Account_Role {
     @Column(name="Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "Account_Id", referencedColumnName = "AccountId")
     private Account account;
     @ManyToOne

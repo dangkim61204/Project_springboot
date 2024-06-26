@@ -12,24 +12,21 @@
     var endpointUrl = /*[[@{/path/to/endpoint}]]*/'';
     console.log(endpointUrl);
 </script>
-<script>
-    function submitSortForm(){
-        document.getElementById('submitForm').submit();
-    }
-</script>
+
 <script type="text/javascript">
     //Document ready thì show loại sách và số lượng trong giỏ hàng (jquery ajax)
-    // $(function() {
-    //
-    //     $.get(endpointUrl + "/countItems", function(data) {
-    //         $('#cart_total').html(data);
-    //     });
-    // });
+    $(function() {
+
+        $.get(endpointUrl + "/countItems", function(data) {
+            $('#cart_total').html(data);
+            // window.location.reload();
+        });
+    });
     //hàm xử lý add 1 sách vào giỏ hàng (jquery ajax)
     function addCart(id) {
-        alert('ydychjfj')
+
         $.get(endpointUrl + "/cart-add/" + id, function(data) {
-            $('#cart_total').html(data);
+            $('#count').html(data);
             window.scrollTo({
                 top : 0,
                 behavior : 'smooth'
@@ -39,19 +36,25 @@
 
 
     //hàm xử lý cập nhật lại số lượng trong giỏ hàng (jquery ajax)
-    // function updateCart(id, value) {
-    //     $.get(endpointUrl + "/updateCart/" + id + "/" + value, function() {
-    //         window.location.reload();
-    //     });
-    // }
-    // //hàm xử lý xóa 1 sách trong giỏ hàng (jquery ajax)
-    // function removeItem(id) {
-    //     if (confirm('Bạn có muốn xóa không?')) {
-    //         $.get(endpointUrl + "/removeItem/" + id, function() {
-    //             window.location.reload();
-    //         });
-    //     }
-    // }
+
+    //hàm xử lý cập nhật lại số lượng trong giỏ hàng (jquery ajax)
+    function updateCart(id, value) {
+        $.get("/updateCart/" + id + "/" + value, function() {
+            window.location.reload();
+            // document.getElementById('submitForm').submit();
+        });
+    }
+
+
+
+    //hàm xử lý xóa 1 sp trong giỏ hàng (jquery ajax)
+    function removeItem(id) {
+        if (confirm('Bạn có muốn xóa không?')) {
+            $.get(endpointUrl + "/removeItem/" + id, function() {
+                window.location.reload();
+            });
+        }
+    }
 </script>
 
 <script th:src="@{/users-assets/vendor/appear.js}"></script>
@@ -81,3 +84,4 @@
 <script th:src="@{/users-assets/js/components/hs.svg-injector.js}"></script>
 <script th:src="@{/users-assets/js/components/hs.go-to.js}"></script>
 <script th:src="@{/users-assets/js/components/hs.selectpicker.js}"></script>
+

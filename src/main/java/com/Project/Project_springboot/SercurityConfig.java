@@ -1,6 +1,7 @@
 package com.Project.Project_springboot;
 
 import com.Project.Project_springboot.service.CustomeAccountDetailService;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,8 +63,5 @@ public class SercurityConfig {
     WebSecurityCustomizer webSecurityCustomizer(){
         return (web)->web.ignoring().requestMatchers("/static/**", "/assets/**", "/uploads/**", "/users-assets/**");
     }
-
-
-
 
 }

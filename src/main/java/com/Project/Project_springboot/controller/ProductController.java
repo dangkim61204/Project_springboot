@@ -59,26 +59,21 @@ public class ProductController {
     @PostMapping("admin/addproduct")
     public String save(Model model ,@Valid @ModelAttribute("product") Product product, BindingResult result, @RequestParam("file") MultipartFile file) {
 
-
-
+        System.out.println(product.getCategory().getCategoryName() + " category name");
         if(result.hasErrors()) {
+            model.addAttribute("listCate", categoryService.getAll());
+            return "admin/product/addproduct";
+        }
 
-            this.storageService.store(file);
-            String fileName = file.getOriginalFilename();
-            product.setImage(fileName);
-            if (this.productService.add(product)) {
-                return "redirect:/admin/product";
-            } else {
-                model.addAttribute("listCate", categoryService.getAll());
-                return "admin/product/addproduct";
-            }
+        this.storageService.store(file);
+        String fileName = file.getOriginalFilename();
+        product.setImage(fileName);
+        if (this.productService.add(product)) {
 
-        }else
-
-        {
-            products.add(product);
-            return "redirect:/";
-
+            return "redirect:/admin/product";
+        }else {
+            model.addAttribute("listCate", categoryService.getAll());
+            return "admin/product/addproduct";
         }
     }
 

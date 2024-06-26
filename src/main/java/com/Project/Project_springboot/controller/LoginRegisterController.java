@@ -55,31 +55,37 @@ public class LoginRegisterController {
         session.setMaxInactiveInterval(3600);
 //        String uuidString = UUID.randomUUID().toString();
         session.setAttribute("account_id", acc.getAccountId());
-        session.setAttribute("name", acc.getFullName());
+        session.setAttribute("fullname", acc.getFullName());
         session.setAttribute("email", acc.getEmail());
+        session.setAttribute("username", acc.getUserName());
+        session.setAttribute("phone", acc.getPhone());
+        session.setAttribute("address", acc.getAddress());
+
 
         return "redirect:/";
     }
 
     @PostMapping("/dang-ky")
-    public String dang_ky( String password, String email, String username ,String fullname, Model model, HttpServletRequest req){
+    public String dang_ky( String password, String email,String address, String phone, String username ,String fullname, Model model, HttpServletRequest req){
         Account acc = this.accountService.findByEmail(email);
-//        System.out.println(acc.getEmail()+"23w4612");
+
         String pass = passwordEncoder.encode(password);
         if(acc != null) {
-            System.out.println(acc.getEmail()+"873468734");
+            System.out.println(acc.getEmail()+"jhcnjv");
             model.addAttribute("msg", "Email đã tồn tại");
 //            model.addAttribute("page", "register");
             return "/user/home";
         }
+        System.out.println("873468734");
         Account ac = new Account();
         String uuidString = UUID.randomUUID().toString();
         ac.setAccountId(uuidString.substring(0, 3));
         ac.setUserName(username);
         ac.setFullName(fullname);
         ac.setEmail(email);
+        ac.setAddress(address);
         ac.setPassword(pass);
-        ac.setPhone("");
+        ac.setPhone(phone);
 
         Account user = accountRepository.save(ac);
         Account_Role role = new Account_Role();
@@ -89,7 +95,7 @@ public class LoginRegisterController {
 
         account_RoleRepository.save(role);
 
-        return "redirect:/dang-nhap";
+        return "redirect:/";
     }
 
     //GET: thoat

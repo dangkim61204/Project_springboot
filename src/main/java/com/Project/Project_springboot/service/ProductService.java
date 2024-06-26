@@ -3,6 +3,8 @@ package com.Project.Project_springboot.service;
 
 import com.Project.Project_springboot.model.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 
 import java.util.List;
@@ -26,5 +28,7 @@ public interface ProductService {
 //
 //    List<Product> findProductByIdAndprice(Integer id, String price);
 
+    Page<Product> findAll(int page, int size, Sort sort);
 
+    Page<Product> findAll(int page, int size);
 }

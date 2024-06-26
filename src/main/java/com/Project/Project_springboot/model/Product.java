@@ -23,7 +23,7 @@ public class Product {
     @Id
     @Column(name="ProductId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ProductId;
+    private Integer productId;
     @Column(name="Code")
     @NotEmpty(message = "Mã sản phẩm không được trống")
     @Length(min = 3,max = 10,message = "Độ dài của mã từ 3-10 ký tự")
@@ -31,7 +31,7 @@ public class Product {
     @NotEmpty(message = "Tên sản phẩm không được trống")
     @Column(name="ProductName" , columnDefinition="Nvarchar(200)")
     private String productName;
-    @NotEmpty(message = "Ảnh không được trống")
+
     @Column(name="Image")
     private String image;
     @Column(name="Images")
@@ -44,10 +44,10 @@ public class Product {
 //    @Column(name="salePrice", columnDefinition="float")
     private double salePrice;
 
-    @Column(name="Desciption", columnDefinition="Nvarchar(NTEXT)")
+    @Column(name="Desciption", columnDefinition="NTEXT")
     private String desciption;
-
-    @ManyToOne
+//    private  Integer categoryId;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
 
