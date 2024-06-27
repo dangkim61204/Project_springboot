@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
 import java.util.Iterator;
@@ -31,5 +32,12 @@ public interface ProductReposity extends JpaRepository<Product, Integer> {
 
     Page<Product> findAll(Pageable pageable);
 
+    //tìm khoảng giá sp
+    @Query("SELECT p FROM Product p WHERE p.price >= :priceFrom")
+    List<Product> searchPriceShopfrom(double priceFrom);
+    @Query("SELECT p FROM Product p WHERE  p.price <= :priceTo")
+    List<Product> searchPriceShopto( double priceTo);
 
+    @Query("SELECT p FROM Product p WHERE p.price >= :priceFrom AND p.price <= :priceTo")
+    List<Product> searchPriceShop(double priceFrom, double priceTo);
 }

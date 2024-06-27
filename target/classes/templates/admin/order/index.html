@@ -29,17 +29,15 @@
                         <tr >
 <!--                            <th style="width: 10px">Id</th>-->
 
-                            <th>Tên Kh</th>
-                            <th>Email</th>
+                            <th>Mã đơn hàng</th>
                             <th>Sđt</th>
-                            <th>Địa chỉ</th>
+                            <th>Ngày đặt</th>
 
                         </tr>
-                        <tr th:each="od:${list1}">
-                            <td th:text="${od.account.fullName}"></td>
-                            <td th:text="${od.account.email}"></td>
-                            <td th:text="${od.account.phone}"></td>
-                            <td th:text="${od.account.address}"></td>
+                        <tr th:each="od:${list}">
+                            <td th:text="${od.orderId}"></td>
+                            <td th:text="${od.phone}"></td>
+                            <td th:text="${od.order_date}"></td>
 
                             <td>
                                 <div style="display: flex;">

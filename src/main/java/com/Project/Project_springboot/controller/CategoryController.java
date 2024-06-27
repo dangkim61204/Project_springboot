@@ -28,7 +28,7 @@ public class CategoryController {
     private ProductReposity productReposity;
 
 
-
+// hien thi danh sách danh mục
     @RequestMapping("admin/category")
     public String index(Model model, @RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         Page<Category> list =this.categoryService.getAll(pageNo);
@@ -38,6 +38,7 @@ public class CategoryController {
         return "admin/category/index";
     }
 
+// thêm mới danh mục
     @RequestMapping("admin/addcategory")
     public String add(Model model ){
         Category category = new Category();
@@ -61,6 +62,7 @@ public class CategoryController {
 
     }
 
+    //sửa danh mục theo id
     @RequestMapping("admin/editcategory/{id}")
     public String edit(Model model , @PathVariable("id") Integer id){
         Category category = this.categoryService.getById(id);
@@ -85,6 +87,7 @@ public class CategoryController {
         }
     }
 
+    //xoá danh mục
     @RequestMapping("admin/deletecategory/{id}")
     public String delete( @PathVariable("id") Integer id, Model model,@RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         if(this.productReposity.categoryId(id).stream().findFirst().isPresent()){
@@ -101,8 +104,5 @@ public class CategoryController {
             return "admin/category/index";
         }
     }
-
-
-
 
 }

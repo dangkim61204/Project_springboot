@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminLoginController {
+    //dang nhap admin
     @RequestMapping("/login")
     public String loginadmin(@Valid Account account , BindingResult bindingResult, Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -29,6 +30,7 @@ public class AdminLoginController {
 
     }
 
+// thoat admin
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         SecurityContextHolder.getContext().setAuthentication(null);

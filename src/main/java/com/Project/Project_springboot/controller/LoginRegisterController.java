@@ -7,21 +7,20 @@ import com.Project.Project_springboot.repository.AccountRepository;
 import com.Project.Project_springboot.repository.Account_RoleRepository;
 import com.Project.Project_springboot.repository.RoleRepository;
 import com.Project.Project_springboot.service.AccountService;
-import com.Project.Project_springboot.service.StorageService;
+
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashSet;
-import java.util.Set;
+
+
 import java.util.UUID;
 
 @Controller
@@ -39,41 +38,13 @@ public class LoginRegisterController {
     @Autowired
     private Account_RoleRepository account_RoleRepository;
 
-    @RequestMapping("/dang-nhap")
-    public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
-
-        Account acc = this.accountService.findByUserName(username);
-//        System.out.println(acc.getEmail()+"23w4612");
-        String pass = passwordEncoder.encode(password);
-        if(acc == null || acc.getPassword().equals(pass)) {
-//            System.out.println(acc.getEmail()+"873468734");
-//            model.addAttribute("msg", "Email đã tồn tại");
-//            model.addAttribute("page", "register");
-            return "/index";
-        }
-        HttpSession session = req.getSession();
-        session.setMaxInactiveInterval(3600);
-//        String uuidString = UUID.randomUUID().toString();
-        session.setAttribute("account_id", acc.getAccountId());
-        session.setAttribute("fullname", acc.getFullName());
-        session.setAttribute("email", acc.getEmail());
-        session.setAttribute("username", acc.getUserName());
-        session.setAttribute("phone", acc.getPhone());
-        session.setAttribute("address", acc.getAddress());
-
-
-        return "redirect:/";
-    }
-
+    //đăng ký trang người dùng
     @PostMapping("/dang-ky")
     public String dang_ky( String password, String email,String address, String phone, String username ,String fullname, Model model, HttpServletRequest req){
         Account acc = this.accountService.findByEmail(email);
-
         String pass = passwordEncoder.encode(password);
         if(acc != null) {
-            System.out.println(acc.getEmail()+"jhcnjv");
             model.addAttribute("msg", "Email đã tồn tại");
-//            model.addAttribute("page", "register");
             return "/user/home";
         }
         System.out.println("873468734");
@@ -92,13 +63,36 @@ public class LoginRegisterController {
         role.setAccount(user);
         Role role1 = roleRepository.findById(2).get();
         role.setRole(role1);
-
         account_RoleRepository.save(role);
 
         return "redirect:/";
     }
 
-    //GET: thoat
+    //đăng nhập trang người dùng
+    @RequestMapping("/dang-nhap")
+    public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
+
+        Account acc = this.accountService.findByUserName(username);
+        String pass = passwordEncoder.encode(password);
+        if(acc == null || acc.getPassword().equals(pass)) {
+            model.addAttribute("msg", "Email hoặc mật khẩu không chính xác");
+            return "/index";
+        }
+        HttpSession session = req.getSession();
+        session.setMaxInactiveInterval(3600);
+//        String uuidString = UUID.randomUUID().toString();
+        session.setAttribute("account_id", acc.getAccountId());
+        session.setAttribute("fullname", acc.getFullName());
+        session.setAttribute("email", acc.getEmail());
+        session.setAttribute("username", acc.getUserName());
+        session.setAttribute("phone", acc.getPhone());
+        session.setAttribute("address", acc.getAddress());
+
+        return "redirect:/";
+    }
+
+
+    //GET: thoat trang user
     @RequestMapping(value = "thoat")
     public String logout(Model model, HttpServletRequest req) {
         HttpSession session = req.getSession();

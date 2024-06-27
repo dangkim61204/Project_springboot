@@ -52,6 +52,7 @@ public class OrderController {
 
         model.addAttribute("totalPage", list.getTotalPages());
         model.addAttribute("currentPage", pageNo);
+        model.addAttribute("list", list);
         model.addAttribute("list1", list.getContent());
         return "admin/order/index";
     }
@@ -95,13 +96,8 @@ public String addOrder(String id,String email,String name,String fullname, Strin
         System.out.println("helllo");
         carts = (List<CartItem>) session.getAttribute("cart");
         String timeStamp = new SimpleDateFormat("yyMMdd-HHmmss").format(Calendar.getInstance().getTime());
-//				Integer proid= Integer.parseInt(id);
+
         Order order=new Order();
-//        order.setOrderId();
-//        System.out.println( session.getAttribute("email" )+"qqqq");
-        System.out.println(email+"email");
-        System.out.println(email+"name");
-        System.out.println(email+"phone");
 
         order.setAccount(accountService.findByEmail((String) session.getAttribute("email")));
         order.setOrder_date(Date.valueOf(LocalDate.now()));
@@ -123,6 +119,7 @@ public String addOrder(String id,String email,String name,String fullname, Strin
         }
         orderSevice.insertOrderDetail(order, orderdetails);
         model.addAttribute("msg","Đặt hàng thành công");
+
     } else {
         model.addAttribute("msg","Giỏ hàng trống");
     }

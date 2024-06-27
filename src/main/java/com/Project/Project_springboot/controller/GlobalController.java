@@ -30,24 +30,12 @@ public class GlobalController {
     public void addUserNameToModel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated() && !(authentication.getPrincipal() instanceof String)) {
-            CustomerAccountDetail email = (CustomerAccountDetail) authentication.getPrincipal();
-            model.addAttribute("email", email.getAccount().getEmail());
+            CustomerAccountDetail fullname = (CustomerAccountDetail) authentication.getPrincipal();
+            model.addAttribute("fullname", fullname.getAccount().getFullName());
         }
     }
 
-    // hiển thị số lượng(countItem) sp ở cart
-    @ModelAttribute
-    public void addCountItem(Model model, HttpServletRequest req) {
-        List<CartItem> carts = new ArrayList<>();
-        HttpSession session = req.getSession();
-        if (session.getAttribute("cart") != null) {
-            carts = (List<CartItem>) session.getAttribute("cart");
-        }
-        var itemCount = String.valueOf(carts.size());
-        model.addAttribute("itemCount", itemCount);
 
-
-    }
 
 
 

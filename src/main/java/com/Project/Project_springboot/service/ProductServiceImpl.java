@@ -16,8 +16,6 @@ public class ProductServiceImpl implements ProductService{
         return this.productReposity.findAll();
     }
 
-
-
     @Override
     public Product getById(Integer id) {
         return this.productReposity.findById(id).get();
@@ -91,6 +89,68 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> findProductById(Integer id) {
         return this.productReposity.findByCategoryId(id);
     }
+
+    @Override
+    public List<Product> searchPriceShopfrom(double priceFrom) {
+        return this.productReposity.searchPriceShopfrom(priceFrom);
+    }
+
+    @Override
+    public List<Product> searchPriceShopto(double priceTo) {
+        return productReposity.searchPriceShopto(priceTo);
+    }
+
+    @Override
+    public List<Product> searchPriceShop(double priceFrom, double priceTo) {
+        return productReposity.searchPriceShop(priceFrom, priceTo);
+    }
+
+    @Override
+    public Page<Product> searchPriceShopfrom(double priceFrom, Integer pageNo) {
+        List list = this.searchPriceShopfrom(priceFrom);
+
+        Pageable pageable = PageRequest.of(pageNo-1,5);
+
+        Integer start = (int) pageable.getOffset();
+
+        Integer end =(int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size():pageable.getOffset() + pageable.getPageSize());
+
+        list = list.subList(start, end);
+
+        return new PageImpl<Product>(list, pageable, this.searchPriceShopfrom(priceFrom).size());
+    }
+
+    @Override
+    public Page<Product> searchPriceShopto(double priceTo, Integer pageNo) {
+        List list = this.searchPriceShopto(priceTo);
+
+        Pageable pageable = PageRequest.of(pageNo-1,5);
+
+        Integer start = (int) pageable.getOffset();
+
+        Integer end =(int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size():pageable.getOffset() + pageable.getPageSize());
+
+        list = list.subList(start, end);
+
+        return new PageImpl<Product>(list, pageable, this.searchPriceShopto(priceTo).size());
+    }
+
+    @Override
+    public Page<Product> searchPriceShop(double priceFrom, double priceTo, Integer pageNo) {
+
+        List list = this.searchPriceShop(priceFrom, priceTo);
+
+        Pageable pageable = PageRequest.of(pageNo-1,5);
+
+        Integer start = (int) pageable.getOffset();
+
+        Integer end =(int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size():pageable.getOffset() + pageable.getPageSize());
+
+        list = list.subList(start, end);
+
+        return new PageImpl<Product>(list, pageable, this.searchPriceShop(priceFrom, priceTo).size());
+    }
+
 
     @Override
     public Page<Product> findAll(int page, int size, Sort sort) {

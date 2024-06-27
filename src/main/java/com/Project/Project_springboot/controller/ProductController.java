@@ -10,15 +10,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +31,7 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    //hien thi list sp, phân trang
     @RequestMapping("admin/product")
     public String index(Model model,@Param("key") String key, @RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         Page<Product> list =this.productService.getAll(pageNo);
@@ -47,6 +45,7 @@ public class ProductController {
         return "admin/product/index";
     }
 
+    //thêm mới sp
     @RequestMapping("admin/addproduct")
     public String add(Model model ){
         Product product = new Product();
@@ -77,6 +76,7 @@ public class ProductController {
         }
     }
 
+    //sửa sp theo
     @RequestMapping("admin/editproduct/{id}")
     public String edit(@Valid  Model model , @PathVariable("id") Integer id){
         Product product = this.productService.getById(id);
@@ -95,8 +95,6 @@ public class ProductController {
             this.storageService.store(file);
         }
 
-//        product.setPrice(Float.parseFloat(product.getPrice()));
-
         if(this.productService.update(product)){
             return "redirect:/admin/product";
         }else{
@@ -105,6 +103,7 @@ public class ProductController {
 
     }
 
+    //xoá sp
     @RequestMapping("admin/deleteproduct/{id}")
     public String delete( @PathVariable("id") Integer id){
         if(this.productService.delete(id)){
@@ -113,10 +112,6 @@ public class ProductController {
             return "admin/product/index";
         }
     }
-
-
-
-
 }
 
 

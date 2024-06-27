@@ -1,10 +1,7 @@
 package com.Project.Project_springboot.controller;
 
 import com.Project.Project_springboot.model.CartItem;
-import com.Project.Project_springboot.model.Order;
-import com.Project.Project_springboot.model.OrderDetail;
 import com.Project.Project_springboot.model.Product;
-//import com.Project.Project_springboot.service.CartService;
 import com.Project.Project_springboot.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,23 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.List;
 
 @Controller
 public class CartController {
-//    @Autowired
-//    private CartService cartService;
+
     @Autowired
     private ProductService productService;
 
 
 
-/// add sp vào cart
+/// them sp vao gio hang
     @GetMapping("/cart-add/{id}")
     public @ResponseBody String addToCart(@PathVariable("id") String id, HttpServletRequest req) {
         List<CartItem> carts = new ArrayList<>();
@@ -77,6 +70,19 @@ public class CartController {
         return String.valueOf(carts.size());
     }
 
+    // hiển thị số lượng(countItem) sp ở cart
+    @ModelAttribute
+    public void addCountItem(Model model, HttpServletRequest req) {
+        List<CartItem> carts = new ArrayList<>();
+        HttpSession session = req.getSession();
+        if (session.getAttribute("cart") != null) {
+            carts = (List<CartItem>) session.getAttribute("cart");
+        }
+        var itemCount = String.valueOf(carts.size());
+        model.addAttribute("itemCount", itemCount);
+
+    }
+
 // view cart
     @RequestMapping("/cart")
     public String viewCart(Model model, HttpServletRequest req) {
@@ -84,7 +90,6 @@ public class CartController {
         List<CartItem> carts = new ArrayList<>();
         HttpSession session = req.getSession();
         if (session.getAttribute("cart") != null) {
-
             carts = (List<CartItem>) session.getAttribute("cart");
             for (CartItem cart : carts) {
                 System.out.println(cart.getId() + " " + cart.getName() + " " + cart.getQuantity());
@@ -93,12 +98,11 @@ public class CartController {
 
         }
 
+//khơi tao bien total để tính tổng giá các sp trong gio hnag
         double total = carts.stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
-
         // Đưa danh sách sản phẩm và tổng giá trị vào model
-
         model.addAttribute("total", total);
         model.addAttribute("carts", carts);
 
@@ -106,7 +110,7 @@ public class CartController {
     }
 
 
-    //update carrt
+    //cap nhat gio hang
     @RequestMapping(value = "updateCart/{id}/{value}")
     public @ResponseBody String updateBasket(@PathVariable("id") Integer id, @PathVariable("value") Integer quantity,
                                              Model model, HttpServletRequest req) {
@@ -127,7 +131,7 @@ public class CartController {
         return "";
     }
 
-    //GET: removeItem/{id} "xóa một sp trong giỏ hang"
+   //xoa sp trong gio hang
     @RequestMapping(value = "removeItem/{id}")
     public @ResponseBody String removeItem(@PathVariable("id") String id, HttpServletRequest req) {
         List<CartItem> Removecarts = new ArrayList<>();
@@ -149,7 +153,6 @@ public class CartController {
             }
             session.setAttribute("cart", Removecarts);
         }
-
         return "";
     }
 

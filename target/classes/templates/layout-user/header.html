@@ -47,10 +47,10 @@
                             <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                                 <div th:if="${session.account_id != null}">
                                     <i class="ec ec-user mr-1"></i>
-                                    <h4 style="color: red;">Xin chào, <span th:text="${session.email}">!</span></h4>
+                                    <h4 style="color: red;">Xin chào, <span th:text="${session.fullname}">!</span></h4>
 
 
-                                    <a href="/thoat">Thoát</a>
+                                    <a href="/thoat" class="btn btn-danger">Thoát</a>
 
                                 </div>
 
