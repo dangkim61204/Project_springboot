@@ -2,23 +2,16 @@ package com.Project.Project_springboot.controller;
 
 import com.Project.Project_springboot.model.Account;
 import com.Project.Project_springboot.model.CartItem;
-import com.Project.Project_springboot.model.Category;
 import com.Project.Project_springboot.model.Product;
 import com.Project.Project_springboot.service.CategoryService;
 import com.Project.Project_springboot.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -59,13 +52,22 @@ public class HomeController {
     public String page(){
         return "/user/page";
     }
+    @RequestMapping("/loginUser")
+    public String logiUser(Model model){
+        model.addAttribute("account", new Account());
+        return "/user/login";
+    }
+    @RequestMapping("/registerUser")
+    public String registerUser(Model model){
+        model.addAttribute("account", new Account());
+        return "/user/register";
+    }
 
     //chi tiet sp
     @RequestMapping("/product_detail/{id}")
     public String product_detail(@PathVariable Integer id, Model model){
         Product product = this.productService.getById(id);
         model.addAttribute("product", product);
-
         return "/user/product_detail";
     }
 

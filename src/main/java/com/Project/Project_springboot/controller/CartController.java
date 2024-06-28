@@ -71,17 +71,17 @@ public class CartController {
     }
 
     // hiển thị số lượng(countItem) sp ở cart
-    @ModelAttribute
-    public void addCountItem(Model model, HttpServletRequest req) {
-        List<CartItem> carts = new ArrayList<>();
-        HttpSession session = req.getSession();
-        if (session.getAttribute("cart") != null) {
-            carts = (List<CartItem>) session.getAttribute("cart");
-        }
-        var itemCount = String.valueOf(carts.size());
-        model.addAttribute("itemCount", itemCount);
-
-    }
+//    @ModelAttribute
+//    public void addCountItem(Model model, HttpServletRequest req) {
+//        List<CartItem> carts = new ArrayList<>();
+//        HttpSession session = req.getSession();
+//        if (session.getAttribute("cart") != null) {
+//            carts = (List<CartItem>) session.getAttribute("cart");
+//        }
+//        var itemCount = String.valueOf(carts.size());
+//        model.addAttribute("itemCount", itemCount);
+//
+//    }
 
 // view cart
     @RequestMapping("/cart")

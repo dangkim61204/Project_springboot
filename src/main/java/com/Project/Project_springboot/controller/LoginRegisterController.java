@@ -11,11 +11,14 @@ import com.Project.Project_springboot.service.AccountService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,7 +43,11 @@ public class LoginRegisterController {
 
     //đăng ký trang người dùng
     @PostMapping("/dang-ky")
-    public String dang_ky( String password, String email,String address, String phone, String username ,String fullname, Model model, HttpServletRequest req){
+    public String dang_ky(@Valid  @ModelAttribute("account") Account account, BindingResult bindingResult, String password, String email, String address, String phone, String username , String fullname, Model model, HttpServletRequest req){
+        if (bindingResult.hasErrors()) {
+//            model.addAttribute("account", account);
+            return "/user/register";
+        }
         Account acc = this.accountService.findByEmail(email);
         String pass = passwordEncoder.encode(password);
         if(acc != null) {
@@ -74,9 +81,9 @@ public class LoginRegisterController {
 
         Account acc = this.accountService.findByUserName(username);
         String pass = passwordEncoder.encode(password);
-        if(acc == null || acc.getPassword().equals(pass)) {
-            model.addAttribute("msg", "Email hoặc mật khẩu không chính xác");
-            return "/index";
+        if(acc == null || !acc.getPassword().equals(pass)) {
+            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
+            return "/user/login";
         }
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(3600);

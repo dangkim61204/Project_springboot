@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-6">
                     <div class="border-bottom border-color-1 mb-5">
-                        <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Filters</h3>
+                        <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Categories</h3>
                     </div>
                     <form th:action="@{/shop/categories}" method="get">
                         <div class="border-bottom pb-4 mb-4">
@@ -48,7 +48,7 @@
                         <button type="submit" class="btn px-4 btn-primary-dark-w py-2 rounded-lg">Filter</button>
                     </form>
                     <div>
-                        <h2>Tìm kếm theo giá</h2>
+                        <h2>Search Price</h2>
                         <span style="color: red;" th:text="${mes}"></span>
                         <form method="get" th:action="@{/shop/searchprice}">
                             <label>From:</label>
@@ -62,135 +62,9 @@
 
                 </div>
                 <div>
-<!--                    <form th:action="@{/searchprice}" method="get">-->
-<!--                        <label >From Price:</label>-->
-<!--                        <input type="text"   name="fromPrice" th:value="${formPrice}" >-->
-<!--                        <label >To Price:</label>-->
-<!--                        <input type="text"  name="toPrice"  th:value="${formPrice}">-->
-<!--                        <button style="  margin-top: 15px; padding: 15px 60px;" type="submit" class="btn btn-primary">Filter</button>-->
 
-<!--                        &lt;!&ndash; End .filter-price-action &ndash;&gt;-->
-<!--                    </form>-->
                 </div>
-                <div class="mb-8">
-                    <div class="border-bottom border-color-1 mb-5">
-                        <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
-                    </div>
-                    <ul class="list-unstyled">
-                        <li class="mb-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
-                                        <img class="img-fluid" th:src="@{/users-assets/img/300X300/img1.jpg}" alt="Image Description">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href="../shop/single-product-fullwidth.html">Notebook Black Spire V Nitro VN7-591G</a></h3>
-                                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="far fa-star text-muted"></small>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <del class="font-size-11 text-gray-9 d-block">$2299.00</del>
-                                        <ins class="font-size-15 text-red text-decoration-none d-block">$1999.00</ins>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
-                                        <img class="img-fluid" th:src="@{/users-assets/img/300X300/img3.jpg}" alt="Image Description">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href="../shop/single-product-fullwidth.html">Notebook Black Spire V Nitro VN7-591G</a></h3>
-                                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="far fa-star text-muted"></small>
-                                    </div>
-                                    <div class="font-weight-bold font-size-15">
-                                        $499.00
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
-                                        <img class="img-fluid" th:src="@{/users-assets/img/300X300/img5.jpg}" alt="Image Description">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href="../shop/single-product-fullwidth.html">Tablet Thin EliteBook Revolve 810 G6</a></h3>
-                                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="far fa-star text-muted"></small>
-                                    </div>
-                                    <div class="font-weight-bold font-size-15">
-                                        $100.00
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
-                                        <img class="img-fluid" th:src="@{/users-assets/img/300X300/img6.jpg}" alt="Image Description">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href="../shop/single-product-fullwidth.html">Notebook Purple G952VX-T7008T</a></h3>
-                                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="far fa-star text-muted"></small>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <del class="font-size-11 text-gray-9 d-block">$2299.00</del>
-                                        <ins class="font-size-15 text-red text-decoration-none d-block">$1999.00</ins>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="../shop/single-product-fullwidth.html" class="d-block width-75">
-                                        <img class="img-fluid" th:src="@{/users-assets/img/300X300/img10.png}" alt="Image Description">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href="../shop/single-product-fullwidth.html">Laptop Yoga 21 80JH0035GE W8.1</a></h3>
-                                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="fas fa-star"></small>
-                                        <small class="far fa-star text-muted"></small>
-                                    </div>
-                                    <div class="font-weight-bold font-size-15">
-                                        $1200.00
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
             <div class="col-xl-9 col-wd-9gdot5">
                 <!-- Recommended Products -->
@@ -232,35 +106,10 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-two-example1-tab" data-toggle="pill" href="#pills-two-example1" role="tab" aria-controls="pills-two-example1" aria-selected="false">
-                                    <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                        <i class="fa fa-align-justify"></i>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-three-example1-tab" data-toggle="pill" href="#pills-three-example1" role="tab" aria-controls="pills-three-example1" aria-selected="true">
-                                    <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                        <i class="fa fa-list"></i>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-four-example1-tab" data-toggle="pill" href="#pills-four-example1" role="tab" aria-controls="pills-four-example1" aria-selected="true">
-                                    <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                        <i class="fa fa-th-list"></i>
-                                    </div>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
-<!--                    <div>-->
-<!--                        <form method="get" th:action="@{/shop}">-->
-<!--                            <input type="text" name="key" placeholder="Tìm kiếm sản phẩm..." th:value="${key}">-->
-<!--                            <button type="submit" class="btn btn-primary">Search</button>-->
-<!--                        </form>-->
-<!--                    </div>-->
+
                     <div class="d-flex">
 
                         <form id="submitForm" th:action="@{/shop-sort}"  method="get" onchange="submitSortForm()">
@@ -339,9 +188,7 @@
                                         <div class="product-item__body pb-xl-2">
                                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
-                                            <div class="mb-2">
-                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" th:src="@{/users-assets/img/212X200/img1.jpg}" alt="Image Description"></a>
-                                            </div>
+
                                             <div class="mb-3">
                                                 <a class="d-inline-flex align-items-center small font-size-14" href="#">
                                                     <div class="text-warning mr-2">
@@ -1898,36 +1745,7 @@
                             "slidesToShow": 1
                         }
                     }]'>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img1.png}" alt="Image Description">
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img2.png}" alt="Image Description">
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img3.png}" alt="Image Description">
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img4.png}" alt="Image Description">
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img5.png}" alt="Image Description">
-                        </a>
-                    </div>
-                    <div class="js-slide">
-                        <a href="#" class="link-hover__brand">
-                            <img class="img-fluid m-auto max-height-50" th:src="@{/users-assets/img/200X60/img6.png}" alt="Image Description">
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </div>

@@ -96,40 +96,40 @@ public class ShopController {
 
     // sort name A-Z, price a-z
 
-//    @GetMapping("/shop-sort")
-//    public String sort(Model model,
-//                       @RequestParam(defaultValue = "0") int page,
-//                       @RequestParam(defaultValue = "10") int size,
-//                       @RequestParam(defaultValue = "default",required = false) String sort) {
-//        Sort sort1 = Sort.unsorted();
-//        switch (sort) {
-//            case "name_asc":
-//                sort1 = Sort.by("productName").ascending();//a-z
-//                break;
-//            case "name_desc":
-//                sort1 = Sort.by("productName").descending();//z-A
-//                break;
-//            case "price_asc":
-//                 sort1 = Sort.by("price").ascending();//a-z
-//                 break;
-//            case "price_desc":
-//                 sort1 = Sort.by("price").descending();//a-z
-//                 break;
-//        }
-//        Page<Product> productPage = productService.findAll(page, size, sort1);
+    @GetMapping("/shop-sort")
+    public String sort(Model model,
+                       @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "10") int size,
+                       @RequestParam(defaultValue = "default",required = false) String sort) {
+        Sort sort1 = Sort.unsorted();
+        switch (sort) {
+            case "name_asc":
+                sort1 = Sort.by("productName").ascending();//a-z
+                break;
+            case "name_desc":
+                sort1 = Sort.by("productName").descending();//z-A
+                break;
+            case "price_asc":
+                 sort1 = Sort.by("price").ascending();//a-z
+                 break;
+            case "price_desc":
+                 sort1 = Sort.by("price").descending();//a-z
+                 break;
+        }
+        Page<Product> productPage = productService.findAll(page, size, sort1);
+        model.addAttribute("categories", categoryService.getAll());
+//        model.addAttribute("brands", brandService.getAll());
+        model.addAttribute("products", productPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
+        model.addAttribute("sort", sort);
+//        model.addAttribute("page", "shop/shop");
+        return "/user/shop";
+//        Page<Product> pro = productService.findAll( page,size, sort1);
 //        model.addAttribute("categories", categoryService.getAll());
-////        model.addAttribute("brands", brandService.getAll());
-//        model.addAttribute("products", productPage);
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("pageSize", size);
-//        model.addAttribute("sort", sort);
-////        model.addAttribute("page", "shop/shop");
+//        model.addAttribute("products", pro);
 //        return "/user/shop";
-////        Page<Product> pro = productService.findAll( page,size, sort1);
-////        model.addAttribute("categories", categoryService.getAll());
-////        model.addAttribute("products", pro);
-////        return "/user/shop";
-//    }
+    }
 
 
 }
