@@ -7,10 +7,12 @@ import com.Project.Project_springboot.repository.ProductReposity;
 import com.Project.Project_springboot.service.CategoryService;
 import com.Project.Project_springboot.service.ProductService;
 import com.Project.Project_springboot.service.StorageService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.model.IModel;
@@ -49,7 +51,12 @@ public class CategoryController {
     }
 
     @PostMapping("admin/addcategory")
-    public String save(@ModelAttribute("category") Category category, @RequestParam("file") MultipartFile file){
+    public String save(Model model,@Valid @ModelAttribute("category") Category category, BindingResult result, @RequestParam("file") MultipartFile file){
+
+        if(result.hasErrors()) {
+            model.addAttribute("listCate", categoryService.getAll());
+            return "admin/category/addcategory";
+        }
         this.storageService.store(file);
         String fileName = file.getOriginalFilename();
         category.setImage(fileName);

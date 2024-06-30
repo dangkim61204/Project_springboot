@@ -1,6 +1,7 @@
 package com.Project.Project_springboot.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,10 @@ public class Category {
     @Column(name="CategoryId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
+    @NotEmpty(message = "Tên danh mục không được trống")
     @Column(name="CategoryName" ,columnDefinition="Nvarchar(100)")
     private String categoryName;
+//    @NotEmpty(message = "Ảnh không được trống")
     @Column(name="Image" , columnDefinition="Nvarchar(255)")
     private String image;
     @Column(name="Active")

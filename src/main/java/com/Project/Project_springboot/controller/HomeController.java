@@ -54,12 +54,12 @@ public class HomeController {
     }
     @RequestMapping("/loginUser")
     public String logiUser(Model model){
-        model.addAttribute("account", new Account());
+//        model.addAttribute("account", new Account());
         return "/user/login";
     }
     @RequestMapping("/registerUser")
     public String registerUser(Model model){
-        model.addAttribute("account", new Account());
+//        model.addAttribute("account", new Account());
         return "/user/register";
     }
 

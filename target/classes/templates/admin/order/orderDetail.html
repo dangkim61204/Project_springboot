@@ -8,58 +8,58 @@
     <div th:replace="admin/layout/aside :: aside"></div>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-            <h1>Thông tin chi tiết</h1>
+            <h1>Order Details</h1>
         <div class="col-md">
             <div class="box">
-                    <h2>Thông tin khách hàng</h2>
-                    <a href="/admin/order" class="btn btn-primary">Quay lại</a>
+
                 <!-- /.box-header -->
-                <div class="box-body1" style="text-align: center">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Tên Kh</th>
-                            <th>Email</th>
-                            <th>Sđt</th>
-                            <th>Địa chỉ</th>
-                        </tr>
-                        <tr>
-                            <td th:text="${account.fullName}"></td>
-                            <td th:text="${account.email}"></td>
-                            <td th:text="${account.phone}"></td>
-                            <td th:text="${account.address}"></td>
-                        </tr>
-                    </table>
-                </div>
-                <h2>Chi tiết đơn hàng</h2>
-                <div class="box-body" style="text-align: center">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Desciption</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Toltal</th>
-                            <th>Ngày đặt</th>
-                        </tr>
-                        <tr th:each="od:${orderDetail}">
-                            <td th:text="${od.product.code}"></td>
-                            <td th:text="${od.product.productName}"></td>
-                            <td>
-                                <img th:src="@{'/uploads/'+ ${od.product.image}}" width="60px">
-                            </td>
-                            <td th:utext="${od.product.desciption}"></td>
-                            <td th:text="${#numbers.formatCurrency(od.price)}"></td>
-                            <td th:text="${od.quantity}"></td>
-                            <td th:text="${#numbers.formatCurrency(od.price*od.quantity)}"></td>
-                            <td th:text="${od.order.order_date}"></td>
-                        </tr>
-                    </table>
-                    <td style="float: right ;">Tổng tiền: <span style="font-weight: bold; color: crimson;"
-                                                                th:text="${#numbers.formatCurrency(total)}"></span></td>
+                <div class="box-body1" >
+                    <div class=""   >
+                        <h2>Customer information:</h2>
+
+                        <b>Customer name:</b> <th th:text="${account.fullName}"></th>
+                        <br>
+                        <b>Email:</b><th th:text="${account.email}"></th>
+                        <br>
+                        <b>Phone:</b><th th:text="${account.phone}"></th>
+                        <br>
+                        <b>Address</b><th th:text="${account.address}"></th>
+                    </div>
                 </div>
 
+                <div class="box-body" style="text-align: center;">
+                    <div class="">
+                        <h2>Order details information:</h2>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Desciption</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Toltal</th>
+                                <th>Order date</th>
+                            </tr>
+                            <tr th:each="od:${orderDetail}">
+                                <td th:text="${od.product.code}"></td>
+                                <td th:text="${od.product.productName}"></td>
+                                <td>
+                                    <img th:src="@{'/uploads/'+ ${od.product.image}}" width="60px">
+                                </td>
+                                <td th:utext="${od.product.desciption}"></td>
+                                <td th:text="${#numbers.formatCurrency(od.price)}"></td>
+                                <td th:text="${od.quantity}"></td>
+                                <td th:text="${#numbers.formatCurrency(od.price*od.quantity)}"></td>
+                                <td th:text="${od.order.order_date}"></td>
+                            </tr>
+                        </table>
+                        <td style="float: right ;">SubTotal: <span style="font-weight: bold; color: crimson;"
+                                                                   th:text="${#numbers.formatCurrency(total)}"></span></td>
+                    </div>
+
+                </div>
+                <a href="/admin/order" class="btn btn-primary">Back</a>
             </div>
             <!-- /.content -->
         </div>

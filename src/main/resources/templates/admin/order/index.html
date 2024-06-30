@@ -19,29 +19,25 @@
             <div class="box">
                 <!-- /.box-header -->
 
-                <div class="box-body" style="text-align: center">
-<!--                    <form method="get" th:action="@{/admin/order}">-->
-<!--                        <input type="text" name="key" placeholder="Tìm kiếm đơn hàng..." th:value="${key}">-->
-<!--                        <button type="submit" class="btn btn-primary">Search</button>-->
-<!--                    </form>-->
+                <div class="box-body" >
 
                     <table class="table table-bordered">
                         <tr >
-<!--                            <th style="width: 10px">Id</th>-->
-
-                            <th>Mã đơn hàng</th>
-                            <th>Sđt</th>
-                            <th>Ngày đặt</th>
+                            <th style="text-align: center;">Code Orders</th>
+                            <th style="text-align: center;">Customer Name</th>
+                            <th style="text-align: center;">Phone</th>
+                            <th style="text-align: center;">Order Date</th>
 
                         </tr>
-                        <tr th:each="od:${list}">
+                        <tr th:each="od:${list}" style="text-align: center;">
                             <td th:text="${od.orderId}"></td>
+                            <td th:text="${od.account.fullName}"></td>
                             <td th:text="${od.phone}"></td>
                             <td th:text="${od.order_date}"></td>
 
                             <td>
                                 <div style="display: flex;">
-                                  <a th:href="@{/admin/order-views/{id}(id=${od.orderId})}" class="btn btn-primary">Xem chi tiết</a>
+                                  <a th:href="@{/admin/order-views/{id}(id=${od.orderId})}" class="btn btn-success">Details</a>
                                     <a th:href="@{/admin/deleteorder/{id}(id=${od.orderId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>

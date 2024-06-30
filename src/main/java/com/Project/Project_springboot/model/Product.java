@@ -26,19 +26,13 @@ public class Product {
     private Integer productId;
     @Column(name="Code")
     @NotEmpty(message = "Mã sản phẩm không được trống")
-    @Length(min = 3,max = 10,message = "Độ dài của mã từ 3-10 ký tự")
     private String code;
     @NotEmpty(message = "Tên sản phẩm không được trống")
     @Column(name="ProductName" , columnDefinition="Nvarchar(200)")
     private String productName;
-
+//    @NotEmpty(message = "Ảnh không được trống")
     @Column(name="Image")
     private String image;
-    @Column(name="Images")
-    private String images;
-
-//    @Column(name="Price",nullable = false)
-//    @NotNull(message = "Giá không được để trống")
     @DecimalMin(value = "0.0", inclusive = false, message = "Giá không được để trống")
     private double price;
 //    @Column(name="salePrice", columnDefinition="float")

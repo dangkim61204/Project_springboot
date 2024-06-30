@@ -235,17 +235,9 @@
                   </li>
                 </ul>
               </div>
-              <div class="box-footer clearfix">
-                <ul class="pagination pagination-sm no-margin pull-right">
-                  <li th:if="${currentPage > 1}"><a th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${currentPage - 1}}">&laquo;</a></li>
-                  <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i ? 'active':''}"><a th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${i}}" th:text="${i}"></a></li>
 
-                  <li th:if="${currentPage < totalPage}"><a th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${currentPage + 1}}">&raquo;</a></li>
-                </ul>
-              </div>
-              <div class="tab-pane fade pt-2" id="pills-two-example1" role="tabpanel" aria-labelledby="pills-two-example1-tab">
 
-              </div>
+
               <div class="tab-pane fade pt-2" id="pills-three-example1" role="tabpanel" aria-labelledby="pills-three-example1-tab">
                 <ul class="row list-unstyled products-group no-gutters">
                   <li class="col-6 col-wd-3 col-md-4 product-item">
@@ -256,6 +248,27 @@
               </div>
             </div>
             <!-- End Tab Content -->
+            <style>
+               .clearfix{
+                display: flex;
+              }
+               ul.pagination li a{
+                 color: black;
+                 float: left;
+                 padding: 8px 16px;
+                 text-decoration: none;
+                 border: 1px solid #ddd;
+
+               }
+            </style>
+            <div class="box-footer clearfix" >
+              <ul class="pagination pagination-sm no-margin pull-right" >
+                <li  th:if="${currentPage > 1}"><a  th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${currentPage - 1}}">&laquo;</a></li>
+                <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i ? 'active':''}"><a th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${i}}" th:text="${i}"></a></li>
+
+                <li th:if="${currentPage < totalPage}"><a th:href="@{${key != null && key != ''?'?key='+key+'&':'?'}+'pageNo='+${currentPage + 1}}">&raquo;</a></li>
+              </ul>
+            </div>
           </div>
           <!-- End Features Section -->
         </div>

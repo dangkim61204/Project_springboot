@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Page<Product> getAll(Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo-1,5);
+        Pageable pageable = PageRequest.of(pageNo-1,8);
         return this.productReposity.findAll(pageable);
     }
 
@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService{
     public Page<Product> searchProduct(String key, Integer pageNo) {
         List list = this.searchProduct(key);
 
-        Pageable pageable = PageRequest.of(pageNo-1,5);
+        Pageable pageable = PageRequest.of(pageNo-1,8);
 
         Integer start = (int) pageable.getOffset();
 

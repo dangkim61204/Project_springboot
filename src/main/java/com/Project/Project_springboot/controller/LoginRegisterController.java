@@ -43,11 +43,12 @@ public class LoginRegisterController {
 
     //đăng ký trang người dùng
     @PostMapping("/dang-ky")
-    public String dang_ky(@Valid  @ModelAttribute("account") Account account, BindingResult bindingResult, String password, String email, String address, String phone, String username , String fullname, Model model, HttpServletRequest req){
-        if (bindingResult.hasErrors()) {
-//            model.addAttribute("account", account);
-            return "/user/register";
-        }
+    public String dang_ky( String password, String email, String address, String phone, String username , String fullname, Model model, HttpServletRequest req){
+//        if (bindingResult.hasErrors()) {
+////            model.addAttribute("account", account);
+//            return "/user/register";
+//        }
+//        @Valid  @ModelAttribute("account") Account account, BindingResult bindingResult,
         Account acc = this.accountService.findByEmail(email);
         String pass = passwordEncoder.encode(password);
         if(acc != null) {
@@ -72,19 +73,42 @@ public class LoginRegisterController {
         role.setRole(role1);
         account_RoleRepository.save(role);
 
-        return "redirect:/";
+        return "/user/login";
     }
 
+//    //đăng nhập trang người dùng
+//    @RequestMapping("/dang-nhap")
+//    public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
+//
+//        Account acc = this.accountService.findByUserName(username);
+//        String pass = passwordEncoder.encode(password);
+//        if(acc == null || !acc.getPassword().equals(pass)) {
+//            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
+//            return "/user/login";
+//        }
+//        HttpSession session = req.getSession();
+//        session.setMaxInactiveInterval(3600);
+////        String uuidString = UUID.randomUUID().toString();
+//        session.setAttribute("account_id", acc.getAccountId());
+//        session.setAttribute("fullname", acc.getFullName());
+//        session.setAttribute("email", acc.getEmail());
+//        session.setAttribute("username", acc.getUserName());
+//        session.setAttribute("phone", acc.getPhone());
+//        session.setAttribute("address", acc.getAddress());
+//
+//        return "redirect:/";
+//    }
+
     //đăng nhập trang người dùng
-    @RequestMapping("/dang-nhap")
+    @PostMapping("/dang-nhap")
     public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
 
         Account acc = this.accountService.findByUserName(username);
-        String pass = passwordEncoder.encode(password);
-        if(acc == null || !acc.getPassword().equals(pass)) {
-            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
-            return "/user/login";
-        }
+//        String pass = passwordEncoder.encode(password);
+//        if(acc == null || !acc.getPassword().equals(pass)) {
+//            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
+//            return "/user/login";
+//        }
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(3600);
 //        String uuidString = UUID.randomUUID().toString();
