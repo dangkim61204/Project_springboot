@@ -76,39 +76,16 @@ public class LoginRegisterController {
         return "/user/login";
     }
 
-//    //đăng nhập trang người dùng
-//    @RequestMapping("/dang-nhap")
-//    public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
-//
-//        Account acc = this.accountService.findByUserName(username);
-//        String pass = passwordEncoder.encode(password);
-//        if(acc == null || !acc.getPassword().equals(pass)) {
-//            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
-//            return "/user/login";
-//        }
-//        HttpSession session = req.getSession();
-//        session.setMaxInactiveInterval(3600);
-////        String uuidString = UUID.randomUUID().toString();
-//        session.setAttribute("account_id", acc.getAccountId());
-//        session.setAttribute("fullname", acc.getFullName());
-//        session.setAttribute("email", acc.getEmail());
-//        session.setAttribute("username", acc.getUserName());
-//        session.setAttribute("phone", acc.getPhone());
-//        session.setAttribute("address", acc.getAddress());
-//
-//        return "redirect:/";
-//    }
 
     //đăng nhập trang người dùng
     @PostMapping("/dang-nhap")
     public String dang_nhap( String password, String username, Model model, HttpServletRequest req){
-
+    System.out.println("dang nhap " + " thong tin passửod cu dang " + password + " mk " + username );
         Account acc = this.accountService.findByUserName(username);
-//        String pass = passwordEncoder.encode(password);
-//        if(acc == null || !acc.getPassword().equals(pass)) {
-//            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
-//            return "/user/login";
-//        }
+        if(acc == null ||!passwordEncoder.matches(password, acc.getPassword())) {
+            model.addAttribute("msg", "Tài khoản hoặc mật khẩu không chính xác");
+            return "/user/login";
+        }
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(3600);
 //        String uuidString = UUID.randomUUID().toString();
