@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
     @GetMapping
     public String index(){
-        return "redirect:/admin/";
+        return "admin/index";
     }
 
 
-    @RequestMapping("/")
-        public String admin(HttpServletRequest request, Model model){
-
-        return "/admin/index";
-        }
+//    @RequestMapping("/")
+//        public String admin(HttpServletRequest request, Model model){
+//
+//        return "/admin/index";
+//        }
 
 }

@@ -18,7 +18,7 @@
         <div class="col-md">
             <div class="box">
                 <div class="box-header with-border">
-                    <a href="/admin/addproduct" class="btn btn-success">Add new product</a>
+                    <a href="/admin/product/add" class="btn btn-success">Add new product</a>
 
 
 
@@ -26,7 +26,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body" style="text-align: center">
-                    <form method="get" th:action="@{/admin/product}">
+                    <form method="get" th:action="@{/admin/product/list}">
                         <input type="text" name="key" placeholder="search..." th:value="${key}">
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
@@ -53,7 +53,7 @@
                             <td>
                                 <div style="display: flex;">
                                     <a th:href="@{/admin/editproduct/{id}(id=${product.productId})}" class="btn btn-primary">Edit</a>
-                                    <a th:href="@{/admin/deleteproduct/{id}(id=${product.productId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
+                                    <a th:href="@{/admin/product/delete/{id}(id=${product.productId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
 

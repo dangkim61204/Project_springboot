@@ -18,12 +18,12 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <a th:href="@{/admin/category}" class="btn btn-primary">Category</a>
+                    <a th:href="@{/admin/category/list}" class="btn btn-primary">Category</a>
 
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" th:action="@{/admin/editcategory}" th:object="${category}" enctype="multipart/form-data">
+                <form role="form" method="post" th:action="@{edit}" th:object="${category}" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" placeholder="Enter name" th:field="*{categoryId}">
                     <div class="box-body">
 

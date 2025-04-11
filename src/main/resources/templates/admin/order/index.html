@@ -37,8 +37,8 @@
 
                             <td>
                                 <div style="display: flex;">
-                                  <a th:href="@{/admin/order-views/{id}(id=${od.orderId})}" class="btn btn-success">Details</a>
-                                    <a th:href="@{/admin/deleteorder/{id}(id=${od.orderId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
+                                  <a th:href="@{/admin/order/orderDetail/{id}(id=${od.orderId})}" class="btn btn-success">Details</a>
+                                    <a th:href="@{/admin/order/delete/{id}(id=${od.orderId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
 

@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin/order/")
 public class OrderController {
     @Autowired
     private ProductService productService;
@@ -42,7 +43,7 @@ public class OrderController {
     private OrderRepository orderRepository;
     //admin
     //list
-    @RequestMapping("admin/order")
+    @RequestMapping("list")
     public String index(Model model, @Param("key") String key, @RequestParam(name="pageNo",defaultValue = "1") Integer pageNo) {
         Page<Order> list = this.orderSevice.getAll(pageNo);
         if (key != null) {
@@ -57,7 +58,7 @@ public class OrderController {
         return "admin/order/index";
     }
     //xem chi tiest đơn hàng  view
-    @RequestMapping(value= {"/admin/order-views/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value= {"orderDetail/{id}"}, method = RequestMethod.GET)
     public String order_detail(Model model, @PathVariable("id") String id) {
         List<OrderDetail> orderDetail = orderSevice.getId(id);
         double total = orderDetail.stream()
@@ -72,13 +73,13 @@ public class OrderController {
         return "admin/order/orderDetail";
     }
 //    //xoas đơn hàng tren admin
-    @RequestMapping("admin/deleteorder/{id}")
+    @RequestMapping("delete/{id}")
     public String delete( @PathVariable("id") Integer id, Model model){
 
         if(this.orderSevice.delete(id)){
-            return "redirect:/admin/order";
+            return "redirect:/admin/order/list";
         }else{
-            return "admin/order/index";
+            return "admin/order/list";
         }
     }
 

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin/product/")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -32,7 +33,7 @@ public class ProductController {
     private CategoryRepository categoryRepository;
 
     //hien thi list sp, phân trang
-    @RequestMapping("admin/product")
+    @RequestMapping("list")
     public String index(Model model,@Param("key") String key, @RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         Page<Product> list =this.productService.getAll(pageNo);
         if(key != null){
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     //thêm mới sp
-    @RequestMapping("admin/addproduct")
+    @RequestMapping("add")
     public String add(Model model ){
         Product product = new Product();
         model.addAttribute("product", product);
@@ -55,7 +56,7 @@ public class ProductController {
         return "admin/product/addproduct";
     }
 
-    @PostMapping("admin/addproduct")
+    @PostMapping("add")
     public String save(Model model ,@Valid @ModelAttribute("product") Product product, BindingResult result, @RequestParam("file") MultipartFile file) {
 
         System.out.println(product.getCategory().getCategoryName() + " category name");
@@ -69,7 +70,7 @@ public class ProductController {
         product.setImage(fileName);
         if (this.productService.add(product)) {
 
-            return "redirect:/admin/product";
+            return "redirect:/admin/product/list";
         }else {
             model.addAttribute("listCate", categoryService.getAll());
             return "admin/product/addproduct";
@@ -104,10 +105,10 @@ public class ProductController {
     }
 
     //xoá sp
-    @RequestMapping("admin/deleteproduct/{id}")
+    @RequestMapping("delete/{id}")
     public String delete( @PathVariable("id") Integer id){
         if(this.productService.delete(id)){
-            return "redirect:/admin/product";
+            return "redirect:/admin/product/list";
         }else{
             return "admin/product/index";
         }

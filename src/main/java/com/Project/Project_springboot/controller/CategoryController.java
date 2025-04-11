@@ -20,6 +20,7 @@ import org.thymeleaf.model.IModel;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin/category/")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -31,7 +32,7 @@ public class CategoryController {
 
 
 // hien thi danh sách danh mục
-    @RequestMapping("admin/category")
+    @GetMapping("list")
     public String index(Model model, @RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         Page<Category> list =this.categoryService.getAll(pageNo);
         model.addAttribute("totalPage", list.getTotalPages());
@@ -41,7 +42,7 @@ public class CategoryController {
     }
 
 // thêm mới danh mục
-    @RequestMapping("admin/addcategory")
+    @GetMapping("add")
     public String add(Model model ){
         Category category = new Category();
         model.addAttribute("category", category);
@@ -50,7 +51,7 @@ public class CategoryController {
         return "admin/category/addcategory";
     }
 
-    @PostMapping("admin/addcategory")
+    @PostMapping("add")
     public String save(Model model,@Valid @ModelAttribute("category") Category category, BindingResult result, @RequestParam("file") MultipartFile file){
 
         if(result.hasErrors()) {
@@ -61,7 +62,7 @@ public class CategoryController {
         String fileName = file.getOriginalFilename();
         category.setImage(fileName);
         if(this.categoryService.add(category)){
-            return "redirect:/admin/category";
+            return "redirect:/admin/category/list";
         }
          else{
             return "admin/category/addcategory";
@@ -70,14 +71,14 @@ public class CategoryController {
     }
 
     //sửa danh mục theo id
-    @RequestMapping("admin/editcategory/{id}")
+    @GetMapping("edit/{id}")
     public String edit(Model model , @PathVariable("id") Integer id){
         Category category = this.categoryService.getById(id);
         model.addAttribute("category", category);
         return "admin/category/editcategory";
     }
 
-    @PostMapping("admin/editcategory")
+    @PostMapping("edit")
     public String update(@ModelAttribute("category") Category category, @RequestParam("file") MultipartFile file, @RequestParam("oldPicture") String oldPicture){
         String fileName = file.getOriginalFilename();
         if(fileName.equals("")){
@@ -88,14 +89,14 @@ public class CategoryController {
             this.storageService.store(file);
         }
         if(this.categoryService.update(category)){
-            return "redirect:/admin/category";
+            return "redirect:/admin/category/list";
         }else{
             return "admin/category/editcategory";
         }
     }
 
     //xoá danh mục
-    @RequestMapping("admin/deletecategory/{id}")
+    @GetMapping("delete/{id}")
     public String delete( @PathVariable("id") Integer id, Model model,@RequestParam(name="pageNo",defaultValue = "1") Integer pageNo){
         if(this.productReposity.categoryId(id).stream().findFirst().isPresent()){
              model.addAttribute("mes", "không thể xoá danh mục khi đã có sp thuộc danh mục này");
@@ -103,12 +104,12 @@ public class CategoryController {
             model.addAttribute("totalPage", list.getTotalPages());
             model.addAttribute("currentPage", 1);
             model.addAttribute("list", list);
-            return "admin/category/index";
+            return "admin/category/list";
         }
         if(this.categoryService.delete(id)){
-            return "redirect:/admin/category";
+            return "redirect:/admin/category/list";
         }else{
-            return "admin/category/index";
+            return "admin/category/list";
         }
     }
 

@@ -20,7 +20,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body" style="text-align: center">
-                    <form method="get" th:action="@{/admin/account}">
+                    <form method="get" th:action="@{/admin/account/list}">
                         <input type="text" name="key" placeholder="Tìm tài khoản..." th:value="${key}">
                         <button type="submit" class="btn btn-primary">Search</button>
                     </form>
@@ -49,7 +49,7 @@
                             <td>
                                 <div style="display: flex;">
 <!--                                    <a th:href="@{/admin/editproduct/{id}(id=${product.productId})}" class="btn btn-primary">Edit</a>-->
-                                    <a th:href="@{/admin/deleteaccount/{id}(id=${acc.accountId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá tài khoản này không?')" class="btn btn-danger">Delete</a>
+                                    <a th:href="@{/admin/account/delete/{id}(id=${acc.accountId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá tài khoản này không?')" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>
 
