@@ -24,7 +24,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" th:action="@{/admin/editproduct}" th:object="${product}" enctype="multipart/form-data">
+                <form role="form" method="post" th:action="@{/admin/product/edit/{id}(id=${product.productId})}" th:object="${product}" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" id="id" placeholder="Enter name" th:field="*{productId}">
                     <div class="box-body">
 
