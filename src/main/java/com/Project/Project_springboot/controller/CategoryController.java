@@ -78,7 +78,7 @@ public class CategoryController {
         return "admin/category/editcategory";
     }
 
-    @PostMapping("edit")
+    @PostMapping("edit/{$id}")
     public String update(@ModelAttribute("category") Category category, @RequestParam("file") MultipartFile file, @RequestParam("oldPicture") String oldPicture){
         String fileName = file.getOriginalFilename();
         if(fileName.equals("")){

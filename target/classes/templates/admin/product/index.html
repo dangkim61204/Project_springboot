@@ -52,7 +52,7 @@
                             <td th:utext="${product.desciption}"></td>
                             <td>
                                 <div style="display: flex;">
-                                    <a th:href="@{/admin/editproduct/{id}(id=${product.productId})}" class="btn btn-primary">Edit</a>
+                                    <a th:href="@{/admin/product/edit/{id}(id=${product.productId})}" class="btn btn-primary">Edit</a>
                                     <a th:href="@{/admin/product/delete/{id}(id=${product.productId})}" style="margin-left: 10px"  onClick="return confirm('Bạn có muốn xoá không?')" class="btn btn-danger">Delete</a>
                                 </div>
                             </td>

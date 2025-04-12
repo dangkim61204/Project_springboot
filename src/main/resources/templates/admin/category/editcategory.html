@@ -23,7 +23,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" th:action="@{edit}" th:object="${category}" enctype="multipart/form-data">
+                <form role="form" method="post" th:action="@{/admin/category/edit/{id}(id=${category.CategoryId})}" th:object="${category}" enctype="multipart/form-data">
                     <input type="hidden" class="form-control" placeholder="Enter name" th:field="*{categoryId}">
                     <div class="box-body">
 

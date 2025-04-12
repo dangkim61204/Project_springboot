@@ -78,7 +78,7 @@ public class ProductController {
     }
 
     //sửa sp theo
-    @RequestMapping("admin/editproduct/{id}")
+    @RequestMapping("edit/{id}")
     public String edit(@Valid  Model model , @PathVariable("id") Integer id){
         Product product = this.productService.getById(id);
         model.addAttribute("product", product);
@@ -86,7 +86,7 @@ public class ProductController {
         return "admin/product/editproduct";
     }
 
-    @PostMapping ("admin/editproduct")
+    @PostMapping ("edit/{$id}")
     public String update(@ModelAttribute("product") Product product,@RequestParam("file") MultipartFile file, @RequestParam("oldPicture") String oldPicture){
         String fileName = file.getOriginalFilename();
         if(fileName.equals("")){
@@ -97,7 +97,7 @@ public class ProductController {
         }
 
         if(this.productService.update(product)){
-            return "redirect:/admin/product";
+            return "redirect:/admin/product/list";
         }else{
             return "admin/category/editproduct";
         }
